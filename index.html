@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Node Chat</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/responsive.min.css"/>
+        
+        <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="css/monokai.css">
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/handlebars.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="js/sessionchat.js"></script>
+    <body>
+        <script id="message-template" type="text/x-handlebars-template">
+            <div class="row-fluid">
+                <div class="span2">
+                    <div class="username wordwrap"><b>{{username}}:</b></div>
+                </div>
+                <div class="span10">
+                    <div class="message wordwrap">{{{message}}}</div>
+                </div>
+            </div>
+        </script>
+        <script id="status-template" type="text/-x-handlebars-template">
+            <div class="row-fluid">
+                <div class="span12">
+                    <p class="status"><b>{{username}}</b> {{message}}</p>
+                </div>
+            </div>
+        </script>
+        <script id="userlist-template" type="text/x-handlebars-template">
+            <li id="{{username}}" class="userlist-item">
+                <div class="wordwrap"><i class="icon-user"></i> {{username}}</div>
+            </li>
+        </script>
+        <script id="session-template" type="text/x-handlebars-template">
+            <p class="pull-right">Hi <b>{{username}}</b>, <button id="logout" class="btn btn-small">Logout</button></p>
+        </script>
+        
+        <div id="signin" class="modal hide fade">
+            <div class="modal-header">
+                <h3>Sign-In</h3>
+            </div>
+            <div class="modal-body">
+                Nickname: <input id="nickInput" type="text" name="nickname"/>
+            </div>
+            <div id="signinError" class="alert alert-error hide">
+                <strong>Invalid Input!</strong>
+                Please enter a valid username
+            </div>
+            <div class="modal-footer">
+                <a id="saveSignin" href="#" class="btn btn-primary">Sign In</a>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span4">
+                    <h1 id="title">Node <span class="colorize-blue">Chat</span></h1>
+                </div>
+                <div class="span2 offset1">
+                    <div id="session">
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span7">
+                    <div class="row-fluid">
+                        <div class="span3">
+                            <div id="userArea">
+                                <ul id="userList">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="span9">
+                            <div id="conversation" class="well">
+                                <div class="container-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <input class="span12" id="message" type="text" name="message" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span7">
+                    <h4>Markdown Editor</h4>
+
+                    <div id="markdownArea">
+                        <textarea id="markdownEditor" class="span12">
+                            
+                        </textarea>
+                        <button id="markdownSubmit" class="btn btn-small btn-info">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
